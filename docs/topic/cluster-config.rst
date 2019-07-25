@@ -269,6 +269,14 @@ creates the `cluster <https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-
     Make sure to specify a VM type that supports premium storage disks.
     For example "E2s-64 v3" does, but "E2-64 v3" does not.
 
+Create a Docker Registry
+------------------------
+.. code:: bash
+
+   az acr create -n <registry-name> -g $AZURE_CLUSTER_NAME --sku Standard
+
+The registry name must conform to `^[a-zA-Z0-9]*$`.
+
 AKS and SSH
 -----------
 
