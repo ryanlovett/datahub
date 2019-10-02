@@ -102,12 +102,16 @@ jupyterhub:
     extraConfig:
       01-custom-attr-spawner: |
         import os
+        from functools import lru_cache
+
         from kubespawner import KubeSpawner
         from tornado import gen
         import z2jh
+        import aiohttp
 
         hosted_domain = 'berkeley.edu'
         course_profile_tmpl = '/srv/jupyterhub/profiles.d/{}-{}.txt'
+        canvas_server = "https://bcourses.berkeley.edu"
 
         def memparse(val):
           '''Parse memory for relative comparisons.'''
@@ -122,9 +126,11 @@ jupyterhub:
           x = memparse(a) ; y = memparse(b)
           return (x > y) - (x < y)
 
+        # for SIS courses
         def course_profile_filename(course, constituent):
           return course_profile_tmpl.format(course, constituent)
 
+        # for SIS courses
         def course_members(course, constituent, hd=None):
           '''Extracts usernames from files containing email addresses.'''
           members = []
@@ -140,6 +146,31 @@ jupyterhub:
                 members.append(email)
               line = f.readline()
           return members
+
+        @lru_cache(maxsize=1024)
+        async def get_canvas_courses(token, enrollment_type=None):
+          '''Fetch a persons courses from Canvas.'''
+          headers = { "Authorization": f"Bearer {token}" }
+          params = {}
+          if enrollment_type: params["enrollment_type"] = enrollment_type
+          url = f"{canvas_server}/api/v1/courses"
+          courses = []
+          async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers, params=params) as r:
+              if r.status != 200:
+                return courses
+              courses = await r.json()
+          return courses
+
+        def course_filter(courses, enrollment_type, attr='id'):
+          '''Filter course attributes by enrollment type.'''
+          attrs = []
+          for course in courses:
+            if 'enrollments' not in course: continue
+            for enrollment in course['enrollments']:
+              if enrollment['type'] == enrollment_type:
+                attrs.append(course[attr]); break
+          return attrs
 
         class CustomAttrSpawner(KubeSpawner):
 
@@ -179,6 +210,45 @@ jupyterhub:
               self.user.admin = False
             elif is_instructor:
               self.user.admin = True
+
+            ## custom.canvas_courses
+            # retrieve the user's enrollments from bcourses
+            canvas_courses = []
+            auth_state = self.user.get_auth_state()
+            if auth_state and 'access_token' in auth_state:
+              token = auth_state['access_token']
+              canvas_courses = get_canvas_courses(token)
+            student_courses = course_filter(canvas_courses, 'student') + \
+                              course_filter(canvas_courses, 'observer')
+            instructor_courses = course_filter(canvas_courses, 'ta') + \
+                                 course_filter(canvas_courses, 'teacher')
+
+            # set resource limits, add volumes, set/revoke admin based on
+            # courses
+            custom_canvas_courses = z2jh.get_config('custom.canvas_courses', {})
+            is_canvas_student = False ; is_canvas_instructor = False
+            for canvas_course_id, profile_data in custom_profiles.items():
+              is_canvas_student    |= (canvas_course_id in student_courses)
+              is_canvas_instructor |= (canvas_course_id in instructor_courses)
+
+              if is_canvas_student or is_canvas_instructor:
+                self.log.warning(f'using profile {course}')
+                self.volumes += profile_data.get('extraVolumes', [])
+                self.volume_mounts += profile_data.get('extraVolumeMounts', [])
+                # set new mem thresholds if specified are bigger than current
+                if 'mem_limit' in profile_data and \
+                    mem_cmp(profile_data['mem_limit'], self.mem_limit) == 1:
+                      self.mem_limit = profile_data['mem_limit']
+                if 'mem_guarantee' in profile_data and \
+                    mem_cmp(profile_data['mem_guarantee'], self.mem_guarantee) == 1:
+                      self.mem_guarantee = profile_data['mem_guarantee']
+
+            # if the user is a student in any canvas course specified by a
+            # profile, they never get to be an admin
+            if is_canvas_student:
+                self.user.admin = False
+            elif is_canvas_instructor:
+                self.user.admin = True
 
             # custom.admin
             custom_admin = z2jh.get_config('custom.admin', {})
