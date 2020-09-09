@@ -62,6 +62,14 @@ RUN pip install --no-cache-dir \
                 jupyter-rsession-proxy==1.2 \
                 jupyter-shiny-proxy==1.1
 
+# Install jupyterlab extensions immediately after infra-requirements.
+# Based on stanza in datahub image.
+RUN jlpm cache dir && mkdir -p /tmp/yarncache && \
+    jlpm config set cache-folder /tmp/yarncache && \
+    jupyter labextension install --debug \
+            @jupyter-widgets/jupyterlab-manager \
+            @jupyterlab/server-proxy@2.1.1 \
+    rm -rf /tmp/yarncache
 
 # Install IRKernel
 RUN R --quiet -e "install.packages('IRkernel', quiet = TRUE)" && \
