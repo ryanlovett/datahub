@@ -17,3 +17,7 @@ jupyterhub:
       - secretName: tls-cert
         hosts:
           - stat159-staging.datahub.berkeley.edu
+  hub:
+    config:
+      Authenticator:
+        manage_groups: false
