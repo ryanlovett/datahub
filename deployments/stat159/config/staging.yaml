@@ -21,3 +21,58 @@ jupyterhub:
     config:
       Authenticator:
         manage_groups: false
+
+    extraConfig:
+      # Use 0x-<title> in `values.yaml` extraConfig values.
+      # We want these to come *before* the extraConfig values
+      # in `values.yaml`. Since these are ordered alphabetically,
+      # 1x-<title> used in `common.yaml` will come after
+      # 0x-<title> used in `values.yaml` - so config set there
+      # will override config set here.
+
+      # I'm TEMPORARILY putting this in config/ and not secrets/ just to
+      # make development conversations easier. In production it should be put
+      # in secrets/ since there will be student identifiers.
+
+      20-roles-and-shared-accounts: |
+        collab_groups = {
+          "test1": [
+            "rylo",
+            "scf-stat",
+            "fernando.perez",
+            "fsapienza",
+          ],
+          "test2": [
+              "rylo",
+              "balajialwar",
+              "fernando.perez",
+              "fsapienza",
+          ],
+          "test3": [
+            "rylo",
+            "scf-stat",
+            "fernando.perez",
+            "fsapienza",
+          ],
+        }
+
+        for collab_group, members in collab_groups.items():
+          print(f"Add group '{collab_group}' with members: {members}")
+          c.JupyterHub.load_groups[collab_group] = members
+
+          # Add user associated with collab group
+          collab_user = f"collab-{collab_group}"
+          # Anyone who in a collab_group can admin and access the
+          # user server, and can list users, of that group.
+          c.JupyterHub.load_roles.append(
+            {
+              "name": f"collab-access-{collab_group}",
+              "scopes": [
+                "admin-ui",
+                f"list:users!user={collab_user}",
+                f"admin:servers!user={collab_user}",
+                f"access:servers!user={collab_user}",
+              ],
+              "groups": [collab_group],
+            }
+          )
