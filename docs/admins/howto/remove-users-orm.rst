@@ -28,3 +28,19 @@ You can run the script on your own device. The script depends on the `jhub_clien
 #. Run `python scripts/delete-unused-users.py {hub_url}`
 
 The script currently does not paginate properly, meaning that it operates on the first 200 users provided by the hub. If there are less then 200 active users it is sufficient to keep running the script in a loop until all inactive users are removed. If there are more than 200 active users this procedure will be inadequate. (the script needs to be fixed!)
+
+
+Reset jupyterhub.sqlite
+=======================
+
+On occassion it may be necessary to delete the jupyterhub.sqlite file. Doing
+so will remove all users and groups, and essentially log out any active users.
+
+For each deployment:
+
+# Get the hub pod with `k -n {namespace} get pod -l component=hub`.
+# Exec into the hub pod with `k -n {namespace} exec -it {pod} bash`.
+# Delete the database with `rm jupyterhub.sqlite`.
+# Kill the hub pod.
+
+This will log you out of the hub if you are already logged in.
