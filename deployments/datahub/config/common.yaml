@@ -175,6 +175,9 @@ jupyterhub:
             subPath: _shared/course/mba-247
             readOnly: true
       # UGBA 88, Fall 2023
+      course::1524680: # issue #5075
+        mem_limit: 3072M
+        mem_guarantee: 3072M
       course::1524680::enrollment_type::teacher:
         extraVolumeMounts:
           - name: home
