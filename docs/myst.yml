@@ -24,6 +24,7 @@ project:
         - file: admins/storage.md
         - file: admins/cluster-config.md
         - file: admins/credentials.md
+        - file: admins/howto/howto.md
           children:
             - file: admins/howto/preview-local.md
             - file: admins/howto/dns.md
@@ -39,7 +40,7 @@ project:
             - file: admins/howto/delete-hub.md
             - file: admins/howto/clusterswitch.md
             - file: admins/howto/github-token.md
-            - file: admins/howto/google-shets.md
+            - file: admins/howto/google-sheets.md
         - file: admins/deployments/deployments.md
           children:
             - file: admins/deployments/datahub.md
