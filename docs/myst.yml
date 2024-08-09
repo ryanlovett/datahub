@@ -39,6 +39,7 @@ project:
             - file: admins/howto/delete-hub.md
             - file: admins/howto/clusterswitch.md
             - file: admins/howto/github-token.md
+            - file: admins/howto/google-shets.md
         - file: admins/deployments/deployments.md
           children:
             - file: admins/deployments/datahub.md
