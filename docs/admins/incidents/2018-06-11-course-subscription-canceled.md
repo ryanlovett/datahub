@@ -1,4 +1,6 @@
-# 2018-06-11 - Azure billing issue causes downtime
+---
+title: 2018-06-11 - Azure billing issue causes downtime
+---
 
 ## Summary
 

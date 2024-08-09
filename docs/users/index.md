@@ -1,10 +1,3 @@
-Using DataHub
-=============
-
-.. toctree::
-   :maxdepth: 1
-
-   services
-   private-repo
-   hubs
-   authentication
+---
+title: Using DataHub
+---

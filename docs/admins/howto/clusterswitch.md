@@ -1,4 +1,6 @@
-# Switching over a hub to a new cluster
+---
+title: Switching over a hub to a new cluster
+---
 
 This document describes how to switch an existing hub to a new cluster.  The example used here refers to moving all UC Berkeley Datahubs.
 
@@ -32,18 +34,24 @@ configured on the new cluster.  Until this is done, `hubploy` and `helm` will fa
 2. At this point, it's usually wise to upgrade `cert-manager` to the latest version found in the chart repo.
    You can find this by running the following command:
 
-		cert-manager-version=$(helm show all -n cert-manager jetstack/cert-manager | grep ^appVersion |  awk '{print $2}')
+   ```bash
+   cert-manager-version=$(helm show all -n cert-manager jetstack/cert-manager | grep ^appVersion |  awk '{print $2}')
+   ```
 
 3. Then, you can install the latest version of `cert-manager`:
 
-		kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${cert-manager-version}/cert-manager.yaml
+   ```bash
+   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${cert-manager-version}/cert-manager.yaml
+   ```
 
 4. Change the corresponding entry in `support/requirements.yaml` to `$cert-manager-version` and commit the changes (do not push).
 
 ## Create the node-placeholder k8s namespace
 The [calendar autoscaler](https://docs.datahub.berkeley.edu/en/latest/admins/howto/calendar-scaler.html) requires the `node-placeholder` namespace.  Run the following command to create it:
 
-		kubectl create namespace node-placeholder
+```bash
+kubectl create namespace node-placeholder
+```
 
 ## Create a new static IP and switch DNS to point our new deployment at it.
 1. Create a new static IP in the [GCP console](https://console.cloud.google.com/networking/addresses/add?project=ucb-datahub-2018).
@@ -58,17 +66,23 @@ First, update any node pools in the configs to point to the new cluster.  Typica
 
 Now we will manually deploy the `support` helm chart:
 
-		sops -d support/secrets.yaml > /tmp/secrets.yaml
-		helm install -f support/values.yaml -f /tmp/secrets.yaml -n support support support/ --set installCRDs=true --debug --create-namespace
+```bash
+sops -d support/secrets.yaml > /tmp/secrets.yaml
+helm install -f support/values.yaml -f /tmp/secrets.yaml \
+    -n support support support/ \
+    --set installCRDs=true --debug --create-namespace
+```
 
 Before continuing, confirm via the GCP console that the IP that was defined in step 1 is now [bound to a forwarding rule](https://console.cloud.google.com/networking/addresses/list?project=ucb-datahub-2018). You can further confirm by listing the services in the [support chart](https://github.com/berkeley-dsep-infra/datahub/blob/staging/support/requirements.yaml) and making sure the ingress-controller is using the newly defined IP.
 
 One special thing to note: our `prometheus` instance uses a persistent volume that contains historical monitoring data.  This is specified in `support/values.yaml`, under the `prometheus:` block:
 
-		persistentVolume:
-		  size: 1000Gi
-		  storageClass: ssd
-		  existingClaim: prometheus-data-2024-05-15
+```yaml
+persistentVolume:
+  size: 1000Gi
+  storageClass: ssd
+  existingClaim: prometheus-data-2024-05-15
+```
 
 ## Manually deploy a hub to staging
 Finally, we can attempt to deploy a hub to the new cluster!  Any hub will do, but we should start with a low-traffic hub (eg:  https://dev.datahub.berkeley.edu).
@@ -79,7 +93,9 @@ Second, update `hubploy.yaml` for this hub and point it to the new cluster you'v
 
 After this is done, add the changes to your feature branch (but don't push).  After that, deploy a hub manually:
 
-		hubploy deploy dev hub staging
+```bash
+hubploy deploy dev hub staging
+```
 
 When the deploy is done, visit that hub and confirm that things are working.
 
@@ -88,8 +104,10 @@ Now, update the remaining hubs' configs to point to the new node pools and `hubp
 
 Then use `hubploy` to deploy them to staging as with the previous step.  The easiest way to do this is to have a list of hubs in a text file, and iterate over it with a `for` loop:
 
-		for x in $(cat hubs.txt); do hubploy deploy ${x} hub staging; done
-		for x in $(cat hubs.txt); do hubploy deploy ${x} hub prod; done
+```bash
+for x in $(cat hubs.txt); do hubploy deploy ${x} hub staging; done
+for x in $(cat hubs.txt); do hubploy deploy ${x} hub prod; done
+```
 
 When done, add the modified configs to your feature branch (and again, don't push yet).
 
@@ -112,4 +130,6 @@ FIN!
 
 After waiting a reasonable period of time (a day or two just to be cautious) and after fetching the usage logs, you may delete the old cluster:
 
-    gcloud container clusters delete ${OLDCLUSTER} --region=us-central1
+```bash
+gcloud container clusters delete ${OLDCLUSTER} --region=us-central1
+```

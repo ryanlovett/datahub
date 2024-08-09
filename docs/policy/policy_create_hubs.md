@@ -1,5 +1,6 @@
-
-# Policy considerations for creating a new hub
+---
+title: Policy considerations for creating a new hub
+---
 
 We have lots of prior experience creating 10+ new hubs catering to the diverse instructional needs of the campus audience. Our decisions to create a new hub were made with a lot of intuition about solving instructors' immediate needs effectively. The objective of this policy document is to codify these heuristics used while creating a new hub. Our policy should guide our decisions with regard to creating new hubs in the future. 
 

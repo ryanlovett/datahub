@@ -1,4 +1,6 @@
-# 2017-03-20 - Too many volumes per disk leave students stuck
+---
+title: 2017-03-20 - Too many volumes per disk leave students stuck
+---
 
 ## Summary ##
 

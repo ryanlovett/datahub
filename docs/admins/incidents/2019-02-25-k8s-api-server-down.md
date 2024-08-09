@@ -1,4 +1,6 @@
-# 2019-02-25 - Azure Kubernetes API Server outage causes downtime
+---
+title: 2019-02-25 - Azure Kubernetes API Server outage causes downtime
+---
 
 ## Summary
 

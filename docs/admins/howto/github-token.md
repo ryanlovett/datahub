@@ -1,8 +1,6 @@
-::: {#howto/github-token}
-  ------------------------------------
-  Create Finely Grained Access Token
-  ------------------------------------
-:::
+---
+title: Create Finely Grained Access Token
+---
 
 At <https://github.com/settings/personal-access-tokens/new>:
 

@@ -1,4 +1,6 @@
-# 2017-02-24 - Proxy eviction strands user
+---
+title: 2017-02-24 - Proxy eviction strands user
+---
 
 ## Summary ##
 

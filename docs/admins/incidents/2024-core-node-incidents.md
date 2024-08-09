@@ -1,12 +1,9 @@
 ---
-name: "Core node incidents (Feb-Mar 2024)"
-about: "Our core node pool and the proxies located there had a series of issues."
-title: "[Incident] Core nodes being autoscaled, configurable HTTP proxy crashes"
-labels: ["type: Hub Incident", "support"]
-assignees: "@shaneknapp"
+title: "2024-02-01 - Core nodes being autoscaled, configurable HTTP proxy crashes"
+date: "2024-02-01"
 ---
 
-# Summary
+## Summary
 
 Over the past couple of years, all of our production hubs have been having persistent issues with our core nodes having major load spikes during 'peak' usage and the impacted node (which hosts all of our hub and proxy pods -- not user pods) crashing. This would then impact every hub, causing all users to see 503 http errors until a new node finishing spinning up.  We also suspect that the 'white screen' issue some users see after logging in is related to this.
 
@@ -136,7 +133,7 @@ None.
 2. Deploy a new core pool with the same RAM and more CPU (Jira DH-259).
 3. Spin up a dev hub and figure out how to use [hubtraf](https://github.com/yuvipanda/hubtraf) to simulate a large number of users doing work.
 
-# Actions
+## Actions
 
 - [x] Incident has been dealt with or is over
 - [x] Sections above are filled out

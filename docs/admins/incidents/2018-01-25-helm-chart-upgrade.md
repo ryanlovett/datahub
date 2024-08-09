@@ -1,4 +1,6 @@
-# 2018-01-25 - Accidental merge to prod brings things down
+---
+title: 2018-01-25 - Accidental merge to prod brings things down
+---
 
 ## Summary
 

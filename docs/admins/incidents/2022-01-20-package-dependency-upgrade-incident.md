@@ -1,12 +1,8 @@
 ---
-name: "\U0001F4DD Hub Incident"
-about: "Report an incident on our running hub infrastructure."
-title: "[Incident] {{ Hubs throwing 505 errors }}"
-labels: ["type: Hub Incident", "support"]
-assignees: ""
+title: "2022-01-20 - Hubs throwing 505 errors"
 ---
 
-# Summary
+## Summary
 
 [PR 1](https://github.com/berkeley-dsep-infra/datahub/pull/3161) and [PR 2](https://github.com/berkeley-dsep-infra/datahub/pull/3164/commits/a3fc71d5a68b030cda91029b5dbb6c01c0eec8fe) were merged to prod between 2 AM and 2.30 AM PST on 1/20. Difference due to the commits can be viewed [here](https://github.com/berkeley-dsep-infra/datahub/pull/3151/files#diff-72ab2727eb8dffad68933fd8e624ef3126cc0a107685c3f0e16fcee62fc77c76)
 
@@ -31,7 +27,7 @@ Quick summary of the problem. Update this section as we learn more, answering:
 
 ## Hub information
 
-- Hub URL: {{(https://r.datahub.berkeley.edu/)}} & most other hubs highlighted above
+- Hub URL: https://r.datahub.berkeley.edu/ and most other hubs highlighted above
 
 ## Timeline (if relevant)
 
@@ -108,7 +104,7 @@ These are only sample subheadings. Every action item should have a GitHub issue
 3. {{ Investigate the reason why pager duty did not throw an alert for 5xx errors when the hubs went down. Fix the alerting mechanism so that they notify all kind of errors }} [link to github issue]
 4. {{ Adding R Studio as part of Repo2Docker}} [link to github issue]
 
-# Actions
+## Actions
 
 - [ ] Incident has been dealt with or is over
 - [ ] Sections above are filled out

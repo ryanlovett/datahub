@@ -1,4 +1,6 @@
-# Accessing private GitHub repos
+---
+title: Accessing private GitHub repos
+---
 
 GitHub is used to store class materials (lab notebooks, lecture notebooks, etc), and
 [nbgitpuller](https://jupyterhub.github.io/nbgitpuller/) is used to distribute it

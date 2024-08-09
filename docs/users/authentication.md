@@ -1,9 +1,10 @@
-# User Authentication
+---
+title: User Authentication
+---
 
 UC Berkeley uses a [Canvas](https://www.instructure.com/canvas/) instance,
 called [bcourses.berkeley.edu](https://bcourses.berkeley.edu). Almost
-all our hubs use this for authentication, although not all yet
-([issue](https://github.com/berkeley-dsep-infra/datahub/issues/1574))).
+all our hubs use this for authentication, although [not all yet](https://github.com/berkeley-dsep-infra/datahub/issues/1574).
 
 ## Who has access?
 

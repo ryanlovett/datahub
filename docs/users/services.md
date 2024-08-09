@@ -1,4 +1,6 @@
-# Services Offered
+---
+title: Services Offered
+---
 
 This page lists the various services we offer as part of DataHub. Not all
 these will be available on all hubs, but we can easily enable them as

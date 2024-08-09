@@ -1,4 +1,6 @@
-# 2017-03-06 - Non-matching hub image tags cause downtime
+---
+title: 2017-03-06 - Non-matching hub image tags cause downtime
+---
 
 ## Summary ##
 
