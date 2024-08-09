@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Preview documentation changes locally</title>
+<title>Develop Documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../admins/pre-reqs.html">Contributing to DataHub</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Common Administrator Tasks</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Preview documentation changes locally</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../admins/pre-reqs.html">Contributing to DataHub</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Common Administrator Tasks</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Develop Documentation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../admins/howto/preview-local.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Preview documentation changes locally</span></a>
+ <span class="menu-text">Develop Documentation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -422,9 +422,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../admins/pre-reqs.html">Contributing to DataHub</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Common Administrator Tasks</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Preview documentation changes locally</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../admins/pre-reqs.html">Contributing to DataHub</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Common Administrator Tasks</a></li><li class="breadcrumb-item"><a href="../../admins/howto/preview-local.html">Develop Documentation</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Preview documentation changes locally</h1>
+<h1 class="title">Develop Documentation</h1>
 </div>
 
 
@@ -441,21 +441,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="strategy-1-run-myst-web-server" class="level2">
-<h2 class="anchored" data-anchor-id="strategy-1-run-myst-web-server">Strategy 1: Run MyST web server</h2>
+<section id="strategy-1-run-quarto-preview" class="level2">
+<h2 class="anchored" data-anchor-id="strategy-1-run-quarto-preview">Strategy 1: Run Quarto preview</h2>
 <ol type="1">
 <li><p>Navigate to the <code>docs</code> directory and run</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">myst</span> start</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Connect to the specific URL in your web browser.</p></li>
 <li><p>Make changes to the documentation while previewing the HTML.</p></li>
 </ol>
 </section>
-<section id="strategy-2-build-html" class="level2">
-<h2 class="anchored" data-anchor-id="strategy-2-build-html">Strategy 2: Build HTML</h2>
+<section id="strategy-2-render-static-html" class="level2">
+<h2 class="anchored" data-anchor-id="strategy-2-render-static-html">Strategy 2: Render static HTML</h2>
 <ol type="1">
 <li><p>Navigate to the <code>docs</code> directory and run</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">myst</span> build</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Open the content in the <code>_build</code> directory in your browser.</p></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Open the content in the <code>_site</code> directory in your browser, e.g.&nbsp;<code>_site/index.html</code>.</p></li>
 </ol>
 
 
