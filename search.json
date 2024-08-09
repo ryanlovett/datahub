@@ -569,7 +569,7 @@
     "href": "admins/howto/preview-local.html",
     "title": "Develop Documentation",
     "section": "",
-    "text": "Navigate to the docs directory and run\nquarto preview\nConnect to the specific URL in your web browser.\nMake changes to the documentation while previewing the HTML.",
+    "text": "Navigate to the docs directory and run quarto preview. You can view the documentation in a browser while you make changes.",
     "crumbs": [
       "Using DataHub",
       "Contributing to DataHub",
@@ -578,11 +578,11 @@
     ]
   },
   {
-    "objectID": "admins/howto/preview-local.html#strategy-1-run-quarto-preview",
-    "href": "admins/howto/preview-local.html#strategy-1-run-quarto-preview",
+    "objectID": "admins/howto/preview-local.html#live-preview",
+    "href": "admins/howto/preview-local.html#live-preview",
     "title": "Develop Documentation",
     "section": "",
-    "text": "Navigate to the docs directory and run\nquarto preview\nConnect to the specific URL in your web browser.\nMake changes to the documentation while previewing the HTML.",
+    "text": "Navigate to the docs directory and run quarto preview. You can view the documentation in a browser while you make changes.",
     "crumbs": [
       "Using DataHub",
       "Contributing to DataHub",
@@ -591,11 +591,11 @@
     ]
   },
   {
-    "objectID": "admins/howto/preview-local.html#strategy-2-render-static-html",
-    "href": "admins/howto/preview-local.html#strategy-2-render-static-html",
+    "objectID": "admins/howto/preview-local.html#render-static-html",
+    "href": "admins/howto/preview-local.html#render-static-html",
     "title": "Develop Documentation",
-    "section": "Strategy 2: Render static HTML",
-    "text": "Strategy 2: Render static HTML\n\nNavigate to the docs directory and run\nquarto render\nOpen the content in the _site directory in your browser, e.g. _site/index.html.",
+    "section": "Render Static HTML",
+    "text": "Render Static HTML\nNavigate to the docs directory and run quarto render. This will build the endire website into the *_site* directory. You can then open files in your web browser.\nYou can also render individual files, which saves time if you do not want to render the whole site. Run quarto render ./path/to/filename.qmd, and then open the corresponding HTML file in the *_site* directory.",
     "crumbs": [
       "Using DataHub",
       "Contributing to DataHub",
