@@ -3,7 +3,7 @@ version: 1
 project:
   title: 'UC Berkeley DataHub'
   description: 'Deployment Documentation'
-  keywords: ['jupyterhub', 'kubernetes', 'berkeley']
+  keywords: ['jupyterhub', 'kubernetes', 'berkeley', 'z2jh']
   authors: ['CDSS and RTL Technical Staff']
   github: https://github.com/berkeley-dsep-infra/datahub
   #jupyter:
