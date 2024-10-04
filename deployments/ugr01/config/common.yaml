@@ -47,6 +47,9 @@ jupyterhub:
     extraEnv:
       # Unset NotebookApp from hub/values. Necessary for recent lab versions.
       JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
+      # xeus-octave complains about XDG_RUNTIME_DIR not being set when
+      # using "notebook for graphics_toolkit
+      XDG_RUNTIME_DIR: "/tmp"
     nodeSelector:
       hub.jupyter.org/pool-name: ugr01-pool
     storage:
