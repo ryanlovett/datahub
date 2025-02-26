@@ -102,7 +102,7 @@ jupyterhub:
   singleuser:
     image:
       name: gitlab-registry.nrp-nautilus.io/berkeley-cdss/cdss-discovery-user-image
-      tag: 476b008f
+      tag: 5c85cf28
 
     # Nautilus-specific configuration
     uid: 0
